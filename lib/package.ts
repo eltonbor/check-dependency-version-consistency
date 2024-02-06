@@ -64,6 +64,11 @@ export class Package {
           );
         }
         return this.packageJson.workspaces.packages;
+      } else if (
+        typeof this.packageJson.workspaces === 'object' &&
+        !('packages' in this.packageJson.workspaces)
+      ) {
+        return [];
       } else {
         throw new TypeError('package.json `workspaces` is not a string array.');
       }
